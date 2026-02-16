@@ -5,6 +5,7 @@ import org.junit.runners.Parameterized;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
+import page.BasePage;
 import page.MainPage;
 import java.util.List;
 import java.util.Arrays;
@@ -38,24 +39,20 @@ public class QuestionsTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(BasePage.MainPageUrl);
         mainPage = new MainPage(driver);
     }
 
     @Test
     public void testCheckAnswer() {
-            System.out.println("Тест вопроса: " + questionText);
-            System.out.println("Ожидаемый ответ: " + expectedAnswer);
-            mainPage.findQuestion(questionText);
-            String actualAnswer = mainPage.getAnswerForQuestion(questionText);
-            System.out.println("Фактический ответ: " + actualAnswer);
-
-            org.junit.Assert.assertTrue(
-                    "Ожидали: '" + expectedAnswer + "'\nПолучили: '" + actualAnswer + "'",
-                    actualAnswer.contains(expectedAnswer)
-            );
-            System.out.println("✓ ОК - ответ верный");
-        }
+        mainPage.findQuestion(questionText);
+        String actualAnswer = mainPage.getAnswerForQuestion(questionText);
+        org.junit.Assert.assertTrue(
+                "Ожидали: '" + expectedAnswer + "'\nПолучили: '" + actualAnswer + "'",
+                actualAnswer.contains(expectedAnswer)
+        );
+        System.out.println("✓ ОК - ответ верный");
+    }
 
     @After
     public void tearDown() {

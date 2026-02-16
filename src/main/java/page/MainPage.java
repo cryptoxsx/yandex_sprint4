@@ -8,26 +8,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class MainPage extends BasePage {
-    // Кнопка для оформления заказа в header
-    private final By orderButtonHeader = By.xpath("//button[@class='Button_Button__ra12g']");
-    // Кнопка для оформления заказа в body
-    private final By orderButtonBody = By.xpath("//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and text()='Заказать']");
 
     public MainPage(WebDriver driver) {
         super(driver);
     }
-
-    public OrderPage clickOrderHeader() {
-        driver.findElement(orderButtonHeader).click();
-        return new OrderPage(driver);
-    }
-
-    public OrderPage clickOrderBody() {
-        WebElement orderButtonBodyElement = driver.findElement(orderButtonBody);
+    // Клик по кнопкам Заказать
+    public OrderPage clickOrderButton(By buttonSelector) {
+        WebElement button = driver.findElement(buttonSelector);
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(orderButtonBodyElement));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", orderButtonBodyElement);
-        orderButtonBodyElement.click();
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", button);
+        button.click();
         return new OrderPage(driver);
     }
 
