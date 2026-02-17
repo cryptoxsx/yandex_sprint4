@@ -1,18 +1,12 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
-import page.BasePage;
 import page.MainPage;
 import java.util.List;
 import java.util.Arrays;
 
 @RunWith(Parameterized.class)
-public class QuestionsTest {
-    private WebDriver driver;
+public class QuestionsTest extends StartEndTest {
     private MainPage mainPage;
     private String questionText;
     private String expectedAnswer;
@@ -36,15 +30,9 @@ public class QuestionsTest {
         });
     }
 
-    @Before
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(BasePage.MainPageUrl);
-        mainPage = new MainPage(driver);
-    }
-
     @Test
     public void testCheckAnswer() {
+        mainPage = new MainPage(driver);
         mainPage.findQuestion(questionText);
         String actualAnswer = mainPage.getAnswerForQuestion(questionText);
         org.junit.Assert.assertTrue(
@@ -52,10 +40,5 @@ public class QuestionsTest {
                 actualAnswer.contains(expectedAnswer)
         );
         System.out.println("✓ ОК - ответ верный");
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 }

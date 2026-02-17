@@ -12,6 +12,11 @@ public class MainPage extends BasePage {
     public MainPage(WebDriver driver) {
         super(driver);
     }
+
+    // Локаторы для кнопок Заказать
+    public static final By orderButtonHeader = By.xpath("//button[@class='Button_Button__ra12g']");
+    public static final By orderButtonBody = By.xpath("//button[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM') and text()='Заказать']");
+
     // Клик по кнопкам Заказать
     public OrderPage clickOrderButton(By buttonSelector) {
         WebElement button = driver.findElement(buttonSelector);
