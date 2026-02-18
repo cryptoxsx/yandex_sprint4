@@ -39,6 +39,5 @@ public class QuestionsTest extends StartEndTest {
                 "Ожидали: '" + expectedAnswer + "'\nПолучили: '" + actualAnswer + "'",
                 actualAnswer.contains(expectedAnswer)
         );
-        System.out.println("✓ ОК - ответ верный");
     }
 }
